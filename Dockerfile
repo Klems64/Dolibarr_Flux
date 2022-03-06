@@ -70,6 +70,6 @@ VOLUME /var/www/documents
 VOLUME /var/www/html/custom
 
 COPY ./docker_run.sh /usr/local/bin/
-ENTRYPOINT ["docker-run.sh"]
+ENTRYPOINT ["docker_run.sh"]
 
 CMD ["apache2-foreground"]
