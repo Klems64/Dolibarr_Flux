@@ -69,7 +69,7 @@ EXPOSE 80
 VOLUME /var/www/documents
 VOLUME /var/www/html/custom
 
-COPY ./docker_run.sh /usr/local/bin/
-ENTRYPOINT ["docker_run.sh"]
+COPY dolibarr_run.sh /usr/local/bin/
+ENTRYPOINT ["dolibarr_run.sh"]
 
 CMD ["apache2-foreground"]
