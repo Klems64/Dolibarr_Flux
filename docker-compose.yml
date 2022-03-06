@@ -11,10 +11,23 @@ volumes:
   mysql-data:
 
 services:
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_DATABASE: "dolibarr"
+      MYSQL_USER: "dolibarr"
+      MYSQL_PASSWORD: "mysupersecretpasswordfordatabase"
+      MARIADB_ROOT_PASSWORD: "mysuperhypersecretpasswordforadminacount"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - internal-pod
+
   dolibarr:
     image: klems64/dolibarr-flux_os:latest
     environment:
-      DOLI_DB_HOST: "mysql"
+      DOLI_DB_HOST: "mariadb"
       DOLI_DB_HOST_PORT: "3306"
       DOLI_DB_USER: "dolibarr"
       DOLI_DB_PASSWORD: "mysupersecretpasswordfordatabase"
@@ -28,14 +41,5 @@ services:
     networks:
       - internal-pod
       - external-pod
-
-  mysql:
-    image: library/mariadb:latest
-    environment:
-      MYSQL_DATABASE: "dolibarr"
-      MYSQL_USER: "dolibarr"
-      MYSQL_PASSWORD: "mysupersecretpasswordfordatabase"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - internal-pod
+    links:
+      - mariadb
