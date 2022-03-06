@@ -1,6 +1,7 @@
 FROM php:7.4-apache-buster
 
 LABEL maintainer="klems@me.com"
+WORKDIR ./
 
 ENV DOLI_INSTALL_AUTO 1
 
@@ -69,7 +70,7 @@ EXPOSE 80
 VOLUME /var/www/documents
 VOLUME /var/www/html/custom
 
-#COPY dolibarr_run.sh /usr/local/bin/
-#ENTRYPOINT ["dolibarr_run.sh"]
+COPY dolibarr_run.sh /usr/local/bin/
+ENTRYPOINT ["dolibarr_run.sh"]
 
 CMD ["apache2-foreground"]
