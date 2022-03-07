@@ -7,7 +7,6 @@ networks:
     internal: false
 
 volumes:
-  dolibarr-docs:
   mysql-data:
 
 services:
@@ -36,8 +35,6 @@ services:
       DOLI_ADMIN_PASSWORD: "mysuperhypersecretpasswordforadminacount"
     ports:
       - 80:80
-    volumes:
-      - dolibarr-docs:/var/www/documents
     networks:
       - internal-pod
       - external-pod
